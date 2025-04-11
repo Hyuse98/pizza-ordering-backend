@@ -14,6 +14,6 @@ public class Email {
 
     @jakarta.validation.constraints.Email
     @NotBlank(message = "Email address is required")
-    private String address;
+    private String emailAddress;
 
 }

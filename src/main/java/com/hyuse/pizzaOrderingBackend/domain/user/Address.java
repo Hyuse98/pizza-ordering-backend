@@ -28,7 +28,7 @@ public class Address {
     private String street;
 
     @NotBlank(message = "Number Cannot be Blank")
-    private String number;
+    private String houseNumber;
 
     @NotBlank(message = "Cep Cannot be Blank")
     private String cep;

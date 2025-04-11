@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class Phone {
     @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "\\d{10,11}", message = "Invalid phone number format (e.g., 10 or 11 digits)")
-    private String number;
+    private String phoneNumber; // Mudando de "number" para "phoneNumber"
 }

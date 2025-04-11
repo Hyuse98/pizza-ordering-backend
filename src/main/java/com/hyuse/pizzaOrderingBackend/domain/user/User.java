@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
+@Table(
+        name = "userAccount"
+)
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

@@ -15,6 +15,6 @@ public class Password {
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 6 characters long")
-    private String value;
+    private String passwordValue; // Mudando de "value" para "passwordValue"
 
 }
