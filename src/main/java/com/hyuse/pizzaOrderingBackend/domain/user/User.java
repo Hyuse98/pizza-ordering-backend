@@ -6,12 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(
-        name = "userAccount"
+        name = "usersAccount"
 )
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,34 +23,39 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotNull(message = "Name is Required")
     @Valid
+    @NotNull(message = "Name is Required")
     @Embedded
     @Getter
+    @Setter
     private Name name;
 
-    @NotNull(message = "Email is Required")
     @Valid
+    @NotNull(message = "Email is Required")
     @Embedded
     @Getter
+    @Setter
     private Email email;
 
-    @NotNull(message = "Phone is Required")
     @Valid
+    @NotNull(message = "Phone is Required")
     @Embedded
     @Getter
+    @Setter
     private Phone phone;
 
-    @NotNull(message = "Password is Required")
     @Valid
+    @NotNull(message = "Password is Required")
     @Embedded
     @Getter
+    @Setter
     private Password password;
 
-    @NotNull(message = "Address is Required")
     @Valid
+    @NotNull(message = "Address is Required")
     @Embedded
     @Getter
+    @Setter
     private Address address;
 
     private boolean active;
@@ -60,5 +67,33 @@ public class User {
         this.address = address;
         this.phone = phone;
         this.active = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name=" + name +
+                ", email=" + email +
+                ", phone=" + phone +
+                ", password=" + password +
+                ", address=" + address +
+                ", active=" + active +
+                '}';
     }
 }

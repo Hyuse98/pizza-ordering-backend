@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Embeddable
 @Getter
 @AllArgsConstructor
@@ -32,5 +34,30 @@ public class Address {
 
     @NotBlank(message = "Cep Cannot be Blank")
     private String cep;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(country, address.country) &&
+                Objects.equals(province, address.province) &&
+                Objects.equals(city, address.city) &&
+                Objects.equals(neighborhood, address.neighborhood) &&
+                Objects.equals(street, address.street) &&
+                Objects.equals(houseNumber, address.houseNumber) &&
+                Objects.equals(cep, address.cep);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(country, province, city, neighborhood, street, houseNumber, cep);
+    }
+
+    @Override
+    public String toString() {
+        return street + ", " + houseNumber + " - " + neighborhood + ", " +
+                city + " - " + province + ", " + country + ", " + cep;
+    }
 
 }
