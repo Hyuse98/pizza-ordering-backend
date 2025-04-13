@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<EntityModel<User>> getUserById(@PathVariable UUID id) {
 
-        User user = userService.findUserById(id);
+        var user = userService.findUserById(id);
         EntityModel<User> entityModel = userAssembler.toModel(user);
         return ResponseEntity.ok(entityModel);
     }
@@ -68,7 +68,7 @@ public class UserController {
     @GetMapping("/email/{emailAddress}")
     public ResponseEntity<EntityModel<User>> getUserByEmail(@PathVariable String emailAddress) {
 
-        User user = userService.findUserByEmail(emailAddress);
+        var user = userService.findUserByEmail(emailAddress);
         EntityModel<User> entityModel = userAssembler.toModel(user);
         return ResponseEntity.ok(entityModel);
     }
@@ -90,7 +90,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<EntityModel<User>> updateUser(@PathVariable UUID id, @RequestBody @Valid User userDetails) {
 
-        User updatedUser = userService.updateUser(id, userDetails);
+        var updatedUser = userService.updateUser(id, userDetails);
         EntityModel<User> entityModel = userAssembler.toModel(updatedUser);
         return ResponseEntity.ok(entityModel);
     }

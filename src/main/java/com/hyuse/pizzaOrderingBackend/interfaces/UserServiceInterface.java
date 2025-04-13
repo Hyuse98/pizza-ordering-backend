@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.service;
+package com.hyuse.pizzaOrderingBackend.interfaces;
 
 import com.hyuse.pizzaOrderingBackend.domain.user.Name;
 import com.hyuse.pizzaOrderingBackend.domain.user.User;

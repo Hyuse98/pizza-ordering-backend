@@ -4,12 +4,12 @@ import com.hyuse.pizzaOrderingBackend.domain.user.Name;
 import com.hyuse.pizzaOrderingBackend.domain.user.User;
 import com.hyuse.pizzaOrderingBackend.exceptions.ResourceNotFoundException;
 import com.hyuse.pizzaOrderingBackend.exceptions.UserAlreadyExistsException;
+import com.hyuse.pizzaOrderingBackend.interfaces.UserServiceInterface;
 import com.hyuse.pizzaOrderingBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserServiceInterface {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com id: " + id));
     }
 
+    //TODO Tratar Upper e Lower Case
     @Override
     @Transactional(readOnly = true)
     public User findUserByName(Name name) {
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserServiceInterface {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado com nome: " + name));
     }
 
+    //TODO Validar Formato do Email
     @Override
     @Transactional(readOnly = true)
     public User findUserByEmail(String emailAddress) {
@@ -67,9 +69,10 @@ public class UserServiceImpl implements UserServiceInterface {
     @Override
     @Transactional
     public User updateUser(UUID id, User userDetails) {
-        User user = findUserById(id);
 
-        if (!user.getEmail().getEmailAddress().equals(userDetails.getEmail().getEmailAddress())) {
+        var user = findUserById(id);
+
+        if (!user.getEmail().getEmailAddress().equalsIgnoreCase(userDetails.getEmail().getEmailAddress())) {
             Optional<User> existingUser = userRepository.findByEmailAddress(userDetails.getEmail().getEmailAddress());
             if (existingUser.isPresent()) {
                 throw new UserAlreadyExistsException("Já existe um usuário com o email: " + userDetails.getEmail().getEmailAddress());
