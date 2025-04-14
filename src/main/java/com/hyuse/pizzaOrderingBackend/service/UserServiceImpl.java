@@ -1,7 +1,6 @@
 package com.hyuse.pizzaOrderingBackend.service;
 
-import com.hyuse.pizzaOrderingBackend.domain.user.Name;
-import com.hyuse.pizzaOrderingBackend.domain.user.User;
+import com.hyuse.pizzaOrderingBackend.domain.user.*;
 import com.hyuse.pizzaOrderingBackend.exceptions.ResourceNotFoundException;
 import com.hyuse.pizzaOrderingBackend.exceptions.UserAlreadyExistsException;
 import com.hyuse.pizzaOrderingBackend.interfaces.UserServiceInterface;
@@ -23,6 +22,41 @@ public class UserServiceImpl implements UserServiceInterface {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    /**
+     * Obtém o usuário atualmente autenticado.
+     * Atualmente, como não há autenticação implementada, retorna o primeiro usuário encontrado ou cria um se não existir.
+     * Isso deve ser substituído por uma implementação real com o Spring Security.
+     * 
+     * @return O usuário autenticado
+     */
+    @Transactional(readOnly = true)
+    public User getCurrentUser() {
+        List<User> users = userRepository.findAll();
+        
+        if (users.isEmpty()) {
+            // Se não houver usuários, cria um usuário padrão para teste
+            Name name = new Name("Cliente", "Padrão");
+            Email email = new Email("cliente.padrao@example.com");
+            Phone phone = new Phone("11987654321");
+            Password password = new Password("senha12345");
+            Address address = new Address(
+                "Brasil", 
+                "São Paulo", 
+                "São Paulo", 
+                "Centro", 
+                "Rua das Pizzas", 
+                "123", 
+                "01234567"
+            );
+            
+            User defaultUser = new User(name, email, password, address, phone);
+            return createUser(defaultUser);
+        }
+        
+        // Retorna o primeiro usuário da lista (apenas para fins de teste)
+        return users.get(0);
     }
 
     @Override
