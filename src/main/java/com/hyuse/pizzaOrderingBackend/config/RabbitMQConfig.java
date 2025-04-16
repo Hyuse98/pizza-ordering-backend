@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.messaging.config;
+package com.hyuse.pizzaOrderingBackend.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;

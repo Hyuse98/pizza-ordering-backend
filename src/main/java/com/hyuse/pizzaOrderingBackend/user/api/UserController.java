@@ -33,14 +33,6 @@ public class UserController {
         this.userAssembler = userAssembler;
     }
 
-//    @PostMapping
-//    public ResponseEntity<EntityModel<User>> createUser(@RequestBody @Valid UserDTO userDTO) {
-//
-//        var createdUser = userService.createUser(userDTO);
-//        EntityModel<User> entityModel = userAssembler.toModel(createdUser);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(entityModel);
-//    }
-
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/{id}")
     public ResponseEntity<EntityModel<User>> getUserById(@PathVariable UUID id) {

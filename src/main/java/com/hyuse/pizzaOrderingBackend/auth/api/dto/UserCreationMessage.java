@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.auth;
+package com.hyuse.pizzaOrderingBackend.auth.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

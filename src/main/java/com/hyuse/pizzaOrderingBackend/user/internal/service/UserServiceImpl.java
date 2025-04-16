@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserServiceInterface {
         Email userEmail = new Email(email);
         Password password = new Password(passwordEncoder.encode(rawPassword));
 
-        // Você pode inicializar os outros campos com valores nulos ou default
         User user = new User();
         user.setEmail(userEmail);
         user.setPassword(password);
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserServiceInterface {
 
         if (!user.getEmail().getEmailAddress().equals(userDTO.getEmailAddress())) {
             validateEmailNotExists(userDTO.getEmailAddress());
-            user.setEmail(new Email(userDTO.getEmailAddress())); // Atualiza o email
+            user.setEmail(new Email(userDTO.getEmailAddress()));
         }
 
         updateUserData(user, userDTO);

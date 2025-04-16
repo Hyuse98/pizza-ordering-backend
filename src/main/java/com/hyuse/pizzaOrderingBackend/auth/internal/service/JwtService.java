@@ -2,7 +2,6 @@ package com.hyuse.pizzaOrderingBackend.auth.internal.service;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ public class JwtService {
     }
 
     public String generateToken(String email) {
-        // 1h
         long expiration = 1000 * 60 * 60;
         return Jwts.builder()
                 .setSubject(email)

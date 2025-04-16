@@ -34,5 +34,5 @@ spring:
         web-allow-others: true
 
 jwt:
-  secret: c4063cdf2e4e4acaa3eedd0eb5463c43e031f89ea887c7a248a8d6e92d8cd9cc
-  expiration: 86400000 # 1 dia em milissegundos
+  secret: ${SHA256}
+  expiration: 86400000 #milissegundos

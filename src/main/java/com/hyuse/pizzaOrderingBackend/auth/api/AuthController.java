@@ -1,6 +1,6 @@
 package com.hyuse.pizzaOrderingBackend.auth.api;
 
-import com.hyuse.pizzaOrderingBackend.auth.UserCreationMessage;
+import com.hyuse.pizzaOrderingBackend.auth.api.dto.UserCreationMessage;
 import com.hyuse.pizzaOrderingBackend.auth.api.dto.AuthRequest;
 import com.hyuse.pizzaOrderingBackend.auth.api.dto.AuthResponse;
 import com.hyuse.pizzaOrderingBackend.auth.internal.service.JwtService;
