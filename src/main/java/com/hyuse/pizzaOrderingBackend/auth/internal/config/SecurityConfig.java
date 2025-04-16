@@ -1,7 +1,7 @@
 package com.hyuse.pizzaOrderingBackend.auth.internal.config;
 
 import com.hyuse.pizzaOrderingBackend.auth.internal.JwtAuthenticationFilter;
-import com.hyuse.pizzaOrderingBackend.order.internal.service.CustomUserDetailsService;
+import com.hyuse.pizzaOrderingBackend.auth.internal.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
