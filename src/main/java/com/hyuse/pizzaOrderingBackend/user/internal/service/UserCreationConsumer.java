@@ -1,6 +1,6 @@
 package com.hyuse.pizzaOrderingBackend.user.internal.service;
 
-import com.hyuse.pizzaOrderingBackend.auth.api.dto.UserCreationMessage;
+import com.hyuse.pizzaOrderingBackend.auth.dto.UserCreationMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 

@@ -95,9 +95,9 @@ public class UserServiceImpl implements UserServiceInterface {
     public User updateUser(UUID id, UserDTO userDTO) {
         User user = findUserById(id);
 
-        if (!user.getEmail().getEmailAddress().equals(userDTO.getEmailAddress())) {
-            validateEmailNotExists(userDTO.getEmailAddress());
-            user.setEmail(new Email(userDTO.getEmailAddress()));
+        if (!user.getEmail().getEmailAddress().equals(userDTO.emailAddress())) {
+            validateEmailNotExists(userDTO.emailAddress());
+            user.setEmail(new Email(userDTO.emailAddress()));
         }
 
         updateUserData(user, userDTO);
@@ -113,18 +113,18 @@ public class UserServiceImpl implements UserServiceInterface {
 
     private void updateUserData(User user, UserDTO userDTO) {
 
-        user.setName(new Name(userDTO.getFirstName(), userDTO.getLastName()));
-        user.setPhone(new Phone(userDTO.getPhoneNumber()));
+        user.setName(new Name(userDTO.firstName(), userDTO.lastName()));
+        user.setPhone(new Phone(userDTO.phoneNumber()));
 
         Address address = user.getAddress();
 
-        address.setCountry(userDTO.getCountry());
-        address.setState(userDTO.getState());
-        address.setCity(userDTO.getCity());
-        address.setNeighborhood(userDTO.getNeighborhood());
-        address.setStreet(userDTO.getStreet());
-        address.setHouseNumber(userDTO.getHouseNumber());
-        address.setZipCode(userDTO.getZipCode());
+        address.setCountry(userDTO.country());
+        address.setState(userDTO.state());
+        address.setCity(userDTO.city());
+        address.setNeighborhood(userDTO.neighborhood());
+        address.setStreet(userDTO.street());
+        address.setHouseNumber(userDTO.houseNumber());
+        address.setZipCode(userDTO.zipCode());
         user.setAddress(address);
     }
 }

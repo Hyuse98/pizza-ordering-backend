@@ -1,58 +1,32 @@
 package com.hyuse.pizzaOrderingBackend.user.api.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserDTO {
+public record UserDTO(
 
-//    @NotBlank(message = "Nome é obrigatório")
-    private String firstName;
+        String firstName,
 
-//    @NotBlank(message = "Sobrenome é obrigatório")
-    private String lastName;
+        String lastName,
 
-    @NotBlank(message = "Email é obrigatório")
-    @Email(message = "Email inválido")
-    private String emailAddress;
+        String emailAddress,
 
-//    @NotBlank(message = "Telefone é obrigatório")
-    @Pattern(regexp = "\\d{10,11}", message = "Invalid phone number format (e.g., 10 or 11 digits)")
-    private String phoneNumber;
+        @Pattern(regexp = "\\d{10,11}", message = "Invalid phone number format (e.g., 10 or 11 digits)")
+        String phoneNumber,
 
-    @NotBlank(message = "Senha é obrigatória")
-    @Size(min = 8, message = "Senha deve ter pelo menos 8 caracteres")
-    private String passwordValue;
+        String passwordValue,
 
-//    @NotBlank(message = "País é obrigatório")
-    private String country;
+        String country,
 
-//    @NotBlank(message = "Estado é obrigatório")
-    private String state;
+        String state,
 
-//    @NotBlank(message = "Cidade é obrigatória")
-    private String city;
+        String city,
 
-//    @NotBlank(message = "Bairro é obrigatório")
-    private String neighborhood;
+        String neighborhood,
 
-//    @NotBlank(message = "Endereço é obrigatório")
-    private String street;
+        String street,
 
-//    @NotBlank(message = "Número é obrigatório")
-    private String houseNumber;
+        String houseNumber,
 
-//    @NotBlank(message = "CEP é obrigatório")
-    private String zipCode;
-
-
+        String zipCode
+) {
 }
