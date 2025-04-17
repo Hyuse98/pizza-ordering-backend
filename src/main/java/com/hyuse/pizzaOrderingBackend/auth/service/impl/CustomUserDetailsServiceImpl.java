@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.auth.internal.service;
+package com.hyuse.pizzaOrderingBackend.auth.service.impl;
 
 import com.hyuse.pizzaOrderingBackend.user.internal.repository.UserRepository;
 import org.slf4j.Logger;
@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsServiceImpl.class);
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public CustomUserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -24,13 +24,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return userRepository.findByEmailAddress(email)
                 .map(user -> {
-                    String encodedPassword = user.getPassword().getPasswordValue(); // Get the encoded password
+                    String encodedPassword = user.getPassword().getPasswordValue();
                     logger.debug("Encoded password from database: {}", encodedPassword);
                     return User.withUsername(user.getEmail().getEmailAddress())
-                            .password(encodedPassword) // Use the encoded password string
+                            .password(encodedPassword) //ByCrypt SHA-256
                             .authorities("USER")
                             .build();
                 })
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
     }
 }

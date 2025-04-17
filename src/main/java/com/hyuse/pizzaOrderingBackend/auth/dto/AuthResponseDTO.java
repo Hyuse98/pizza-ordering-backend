@@ -1,15 +1,15 @@
-package com.hyuse.pizzaOrderingBackend.auth.api.dto;
+package com.hyuse.pizzaOrderingBackend.auth.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class AuthResponse {
+public class AuthResponseDTO {
 
     private String token;
 
-    public AuthResponse(String token) {
+    public AuthResponseDTO(String token) {
         this.token = token;
     }
 }

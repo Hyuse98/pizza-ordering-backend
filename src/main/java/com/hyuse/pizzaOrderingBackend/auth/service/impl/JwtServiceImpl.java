@@ -1,9 +1,11 @@
-package com.hyuse.pizzaOrderingBackend.auth.internal.service;
+package com.hyuse.pizzaOrderingBackend.auth.service.impl;
 
+import com.hyuse.pizzaOrderingBackend.auth.service.JwtServiceInterface;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -11,14 +13,15 @@ import java.security.Key;
 import java.util.Date;
 
 @Service
-public class JwtService {
+public class JwtServiceImpl implements JwtServiceInterface {
 
     private final Key secretKey;
 
-    public JwtService(@Value("${jwt.secret}") String secret) {
+    public JwtServiceImpl(@Value("${jwt.secret}") String secret) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
+    @Override
     public String generateToken(String email) {
         long expiration = 1000 * 60 * 60;
         return Jwts.builder()
@@ -29,6 +32,7 @@ public class JwtService {
                 .compact();
     }
 
+    @Override
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
@@ -38,7 +42,8 @@ public class JwtService {
                 .getSubject();
     }
 
-    public boolean isTokenValid(String token, String username) {
+    @Override
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         try {
             var claims = Jwts.parserBuilder()
                     .setSigningKey(secretKey)
@@ -47,7 +52,7 @@ public class JwtService {
                     .getBody();
 
             boolean notExpired = claims.getExpiration().after(new Date());
-            boolean subjectMatches = claims.getSubject().equals(username);
+            boolean subjectMatches = claims.getSubject().equals(userDetails.getUsername());
 
             return notExpired && subjectMatches;
 
@@ -55,4 +60,5 @@ public class JwtService {
             return false;
         }
     }
+
 }
