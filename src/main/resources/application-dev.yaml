@@ -26,6 +26,13 @@ spring:
     username: guest
     password: guest
 
+  modulith:
+    auto-verify: true
+    base-packages: com.hyuse.pizzaOrderingBackend
+    docs:
+      location: target/spring-modulith-docs
+      api-documentation: true
+
   h2:
     console:
       enabled: true
@@ -34,5 +41,5 @@ spring:
         web-allow-others: true
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: 2fbf5ec66f2d0622a94359b0c88b7142aea023de2c7681705e5068f02b0e68e8 #${JWT_SECRET}
   expiration: ${JWT_EXPIRATION}
