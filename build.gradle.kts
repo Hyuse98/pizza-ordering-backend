@@ -30,6 +30,7 @@ dependencies {
 	//Modulith
 	implementation("org.springframework.modulith:spring-modulith-starter-core")
 	implementation("org.springframework.modulith:spring-modulith-starter-jpa")
+	implementation("org.springframework.modulith:spring-modulith-docs")
 //	implementation("org.springframework.modulith:spring-modulith-starter-mongodb")
 //	runtimeOnly("org.springframework.modulith:spring-modulith-actuator")
 //	runtimeOnly("org.springframework.modulith:spring-modulith-observability")
@@ -86,6 +87,27 @@ dependencyManagement {
 	imports {
 		mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
 	}
+}
+
+tasks.register<JavaExec>("modulithStructure") {
+	group = "modulith"
+	description = "Gera a documentação de módulos do Spring Modulith"
+	classpath = sourceSets["main"].runtimeClasspath
+	mainClass.set("com.hyuse.pizzaOrderingBackend.PizzaOrderingBackendApplication")
+	args("--modulith --spring.profiles.active=dev")
+}
+
+tasks.register<JavaExec>("generateModulithDocs") {
+	group = "modulith"
+	description = "Gera documentação de módulos Spring Modulith"
+	classpath = sourceSets["main"].runtimeClasspath
+	mainClass.set("com.hyuse.pizzaOrderingBackend.PizzaOrderingBackendApplication")
+	args("--modulith:documents", "--spring.profiles.active=dev")
+}
+
+
+tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
+	mainClass.set("com.hyuse.pizzaOrderingBackend.PizzaOrderingBackendApplication")
 }
 
 
