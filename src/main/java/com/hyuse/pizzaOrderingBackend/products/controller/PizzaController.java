@@ -1,9 +1,9 @@
-package com.hyuse.pizzaOrderingBackend.products.api;
+package com.hyuse.pizzaOrderingBackend.products.controller;
 
-import com.hyuse.pizzaOrderingBackend.products.internal.util.PizzaAssembler;
-import com.hyuse.pizzaOrderingBackend.products.internal.model.PizzaFlavor;
-import com.hyuse.pizzaOrderingBackend.products.internal.model.Pizza;
-import com.hyuse.pizzaOrderingBackend.products.internal.service.PizzaServiceImpl;
+import com.hyuse.pizzaOrderingBackend.products.dto.PizzaDTO;
+import com.hyuse.pizzaOrderingBackend.products.service.PizzaServiceInterface;
+import com.hyuse.pizzaOrderingBackend.products.util.PizzaAssembler;
+import com.hyuse.pizzaOrderingBackend.products.model.Pizza;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +23,26 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/api/pizza")
 public class PizzaController {
 
-    private final PizzaServiceImpl pizzaService;
+    private final PizzaServiceInterface pizzaService;
     private final PizzaAssembler pizzaAssembler;
 
     @Autowired
-    public PizzaController(PizzaServiceImpl pizzaService, PizzaAssembler pizzaAssembler) {
+    public PizzaController(PizzaServiceInterface pizzaService, PizzaAssembler pizzaAssembler) {
         this.pizzaService = pizzaService;
         this.pizzaAssembler = pizzaAssembler;
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping
-    public ResponseEntity<EntityModel<Pizza>> createPizza(@RequestBody @Valid Pizza pizza) {
-
-        var createdPizza = pizzaService.createPizza(pizza);
+    public ResponseEntity<EntityModel<Pizza>> createPizza(@RequestBody @Valid PizzaDTO pizzaDTO) {
+        var createdPizza = pizzaService.createPizza(pizzaDTO);
         EntityModel<Pizza> entityModel = pizzaAssembler.toModel(createdPizza);
         return ResponseEntity.status(HttpStatus.CREATED).body(entityModel);
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/flavors/{flavor}")
-    public ResponseEntity<EntityModel<Pizza>> getPizzaByFlavor(PizzaFlavor flavor) {
+    public ResponseEntity<EntityModel<Pizza>> getPizzaByFlavor(String flavor) {
 
         var pizza = pizzaService.findPizzaByFlavor(flavor);
         EntityModel<Pizza> entityModel = pizzaAssembler.toModel(pizza);
@@ -74,12 +73,12 @@ public class PizzaController {
         return ResponseEntity.ok(collectionModel);
     }
 
-    //TODO Implementar metodo Atualizar Depois
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping
-    public ResponseEntity<EntityModel<Pizza>> updatePizza() {
-
-        return null;
+    public ResponseEntity<EntityModel<Pizza>> updatePizza(@PathVariable Long id,@RequestBody @Valid PizzaDTO pizzaDTO) {
+        var pizza = pizzaService.updatePizza(id, pizzaDTO);
+        EntityModel<Pizza> entityModel = pizzaAssembler.toModel(pizza);
+        return ResponseEntity.ok(entityModel);
     }
 
     @SecurityRequirement(name = "bearerAuth")

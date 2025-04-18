@@ -2,7 +2,9 @@ package com.hyuse.pizzaOrderingBackend.products.util;
 
 import com.hyuse.pizzaOrderingBackend.products.dto.PizzaDTO;
 import com.hyuse.pizzaOrderingBackend.products.model.Pizza;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PizzaMapper {
 
     public Pizza toEntity(PizzaDTO pizzaDTO){
