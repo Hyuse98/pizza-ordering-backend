@@ -6,10 +6,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public record PizzaDTO(
-
-        @NotBlank
-        String pizzaFlavor,
+public record ProductDTO(
 
         @NotBlank
         String description,
