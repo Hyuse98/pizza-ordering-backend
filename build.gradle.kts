@@ -57,9 +57,8 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	//implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	//runtimeOnly("org.postgresql:postgresql")
-	//implementation("org.flywaydb:flyway-core")
+	implementation("org.flywaydb:flyway-core")
 	//implementation("org.flywaydb:flyway-database-postgresql")
-
 	//implementation("org.springframework.boot:spring-boot-starter-batch")
 
 	//Infra
