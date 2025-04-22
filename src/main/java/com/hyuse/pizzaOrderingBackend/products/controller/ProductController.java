@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/api/pizza")
+@RequestMapping("/api/product")
 public class ProductController {
 
     private final ProductServiceInterface productService;
@@ -32,49 +32,53 @@ public class ProductController {
         this.productAssembler = productAssembler;
     }
 
+    //TODO ERROR "status": 500, "message": "Ocorreu um erro interno no servidor: could not execute statement [Unique index or primary key violation: \"PRIMARY KEY ON PUBLIC.PRODUCT(ID) ( /* key:1 */ 2500.00, CAST(1 AS BIGINT), 'Notebook')\"; SQL statement:\ninsert into product (price,product_name,id) values (?,?,?) [23505-232]] [insert into product (price,product_name,id) values (?,?,?)]; SQL [insert into product (price,product_name,id) values (?,?,?)]; constraint [PRIMARY KEY]",
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping
-    public ResponseEntity<EntityModel<Product>> createPizza(@RequestBody @Valid ProductDTO productDTO) {
-        var createdPizza = productService.createProduct(productDTO);
-        EntityModel<Product> entityModel = productAssembler.toModel(createdPizza);
+    public ResponseEntity<EntityModel<Product>> createProduct(@RequestBody @Valid ProductDTO productDTO) {
+        var createdProduct = productService.createProduct(productDTO);
+        EntityModel<Product> entityModel = productAssembler.toModel(createdProduct);
         return ResponseEntity.status(HttpStatus.CREATED).body(entityModel);
     }
 
+    //TODO "status": 500,
+    //    "message": "Ocorreu um erro interno no servidor: The given id must not be null",
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/{id}")
-    public ResponseEntity<EntityModel<Product>> getPizzaById(Long id) {
+    public ResponseEntity<EntityModel<Product>> getProductById(Long id) {
 
-        var pizza = productService.findProductById(id);
-        EntityModel<Product> entityModel = productAssembler.toModel(pizza);
+        var product = productService.findProductById(id);
+        EntityModel<Product> entityModel = productAssembler.toModel(product);
         return ResponseEntity.ok(entityModel);
     }
 
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping
-    public ResponseEntity<CollectionModel<EntityModel<Product>>> listAllPizzas() {
+    public ResponseEntity<CollectionModel<EntityModel<Product>>> listAllProducts() {
 
         Collection<Product> products = productService.findAllProducts();
-        Collection<EntityModel<Product>> pizzaEntityModels = products.stream()
+        Collection<EntityModel<Product>> productEntityModels = products.stream()
                 .map(productAssembler::toModel)
                 .collect(Collectors.toList());
 
-        CollectionModel<EntityModel<Product>> collectionModel = CollectionModel.of(pizzaEntityModels,
-                linkTo(methodOn(ProductController.class).listAllPizzas()).withSelfRel());
+        CollectionModel<EntityModel<Product>> collectionModel = CollectionModel.of(productEntityModels,
+                linkTo(methodOn(ProductController.class).listAllProducts()).withSelfRel());
 
         return ResponseEntity.ok(collectionModel);
     }
 
     @SecurityRequirement(name = "bearerAuth")
-    @PutMapping
-    public ResponseEntity<EntityModel<Product>> updatePizza(@PathVariable Long id, @RequestBody @Valid ProductDTO productDTO) {
-        var pizza = productService.updateProduct(id, productDTO);
-        EntityModel<Product> entityModel = productAssembler.toModel(pizza);
+    @PutMapping("/{id}")
+    public ResponseEntity<EntityModel<Product>> updateProduct(@PathVariable Long id, @RequestBody @Valid ProductDTO productDTO) {
+        var product = productService.updateProduct(id, productDTO);
+        EntityModel<Product> entityModel = productAssembler.toModel(product);
         return ResponseEntity.ok(entityModel);
     }
 
+    //TODO "status": 500, "message": "Ocorreu um erro interno no servidor: could not execute statement [Referential integrity constraint violation: \"FK_CART_ITEM_PRODUCT: PUBLIC.CART_ITEM FOREIGN KEY(PRODUCT_ID) REFERENCES PUBLIC.PRODUCT(ID) (CAST(10 AS BIGINT))\"; SQL statement:\ndelete from product where id=? [23503-232]] [delete from product where id=?]; SQL [delete from product where id=?]; constraint [FK_CART_ITEM_PRODUCT: PUBLIC.CART_ITEM FOREIGN KEY(PRODUCT_ID) REFERENCES PUBLIC.PRODUCT(ID) (CAST(10 AS BIGINT)); SQL statement:\ndelete from product where id=? [23503-232]]",
     @SecurityRequirement(name = "bearerAuth")
-    @DeleteMapping
-    public ResponseEntity<EntityModel<Product>> deletePizza(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<EntityModel<Product>> deleteProduct(@PathVariable Long id) {
 
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();

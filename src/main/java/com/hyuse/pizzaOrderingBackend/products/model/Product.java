@@ -12,15 +12,17 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cart_item_seq")
+    @SequenceGenerator(name = "cart_item_seq", sequenceName = "cart_item_seq", allocationSize = 1)  // Keep allocationSize = 1
     private Long id;
 
-    private String description;
+    private String productName;
 
+    @Column(precision = 10, scale = 2)
     private BigDecimal price;
 
-    public Product(String description, BigDecimal price) {
-        this.description = description;
+    public Product(String productName, BigDecimal price) {
+        this.productName = productName;
         this.price = price;
     }
 

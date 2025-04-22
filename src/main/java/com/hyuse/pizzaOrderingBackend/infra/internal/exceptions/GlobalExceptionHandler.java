@@ -1,6 +1,6 @@
 package com.hyuse.pizzaOrderingBackend.infra.internal.exceptions;
 
-import com.hyuse.pizzaOrderingBackend.user.internal.exceptions.UserAlreadyExistsException;
+import com.hyuse.pizzaOrderingBackend.user.exceptions.UserAlreadyExistsException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

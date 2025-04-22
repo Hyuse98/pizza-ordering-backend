@@ -17,6 +17,6 @@ public class ProductAssembler implements RepresentationModelAssembler<Product, E
     public EntityModel<Product> toModel(Product product) {
         return EntityModel.of(product,
                 //linkTo(methodOn(ProductController.class).getPizzaByFlavor(product.getPizzaFlavor())).withSelfRel(),
-                linkTo(methodOn(ProductController.class).listAllPizzas()).withRel("allPizzas"));
+                linkTo(methodOn(ProductController.class).listAllProducts()).withRel("allPizzas"));
     }
 }

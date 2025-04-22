@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.order.api;
+package com.hyuse.pizzaOrderingBackend.order.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ public class OrderController {
 
     //TODO asdwads
 
-//    private final OrderService orderService;
+//    private final OrderServiceImpl orderService;
 //
 //    @GetMapping
 //    public ResponseEntity<List<OrderDTO>> getUserOrders() {

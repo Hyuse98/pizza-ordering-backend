@@ -54,7 +54,7 @@ public class ProductServiceImpl implements ProductServiceInterface {
     @Transactional
     public Product updateProduct(Long id, ProductDTO productDTO) {
         var product = findProductById(id);
-        product.setDescription(productDTO.description());
+        product.setProductName(productDTO.productName());
         product.setPrice(productDTO.price());
         return productRepository.save(product);
     }

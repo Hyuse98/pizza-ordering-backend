@@ -10,7 +10,7 @@ public class ProductMapper {
     public Product toEntity(ProductDTO productDTO){
 
         return new Product(
-                productDTO.description(),
+                productDTO.productName(),
                 productDTO.price()
         );
     }
@@ -18,7 +18,7 @@ public class ProductMapper {
     public ProductDTO toDto(Product product){
 
         return new ProductDTO(
-                product.getDescription(),
+                product.getProductName(),
                 product.getPrice()
         );
     }

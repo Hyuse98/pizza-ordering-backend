@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public record ProductDTO(
 
         @NotBlank
-        String description,
+        String productName,
 
         @NotNull
         @Positive
