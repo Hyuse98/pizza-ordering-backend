@@ -1,7 +1,7 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.util;
+package com.hyuse.pizzaOrderingBackend.user.util;
 
-import com.hyuse.pizzaOrderingBackend.user.api.UserController;
-import com.hyuse.pizzaOrderingBackend.user.internal.model.User;
+import com.hyuse.pizzaOrderingBackend.user.controller.UserController;
+import com.hyuse.pizzaOrderingBackend.user.model.User;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

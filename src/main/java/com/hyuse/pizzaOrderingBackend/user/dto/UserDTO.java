@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.user.api.dto;
+package com.hyuse.pizzaOrderingBackend.user.dto;
 
 import jakarta.validation.constraints.Pattern;
 

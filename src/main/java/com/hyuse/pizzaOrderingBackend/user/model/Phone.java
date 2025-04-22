@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.model;
+package com.hyuse.pizzaOrderingBackend.user.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

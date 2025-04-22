@@ -1,10 +1,10 @@
-package com.hyuse.pizzaOrderingBackend.user.api;
+package com.hyuse.pizzaOrderingBackend.user.controller;
 
-import com.hyuse.pizzaOrderingBackend.user.internal.util.UserAssembler;
-import com.hyuse.pizzaOrderingBackend.user.internal.model.Name;
-import com.hyuse.pizzaOrderingBackend.user.internal.model.User;
-import com.hyuse.pizzaOrderingBackend.user.api.dto.UserDTO;
-import com.hyuse.pizzaOrderingBackend.user.internal.service.UserServiceImpl;
+import com.hyuse.pizzaOrderingBackend.user.util.UserAssembler;
+import com.hyuse.pizzaOrderingBackend.user.model.Name;
+import com.hyuse.pizzaOrderingBackend.user.model.User;
+import com.hyuse.pizzaOrderingBackend.user.dto.UserDTO;
+import com.hyuse.pizzaOrderingBackend.user.service.impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

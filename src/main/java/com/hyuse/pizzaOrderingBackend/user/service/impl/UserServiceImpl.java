@@ -1,11 +1,12 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.service;
+package com.hyuse.pizzaOrderingBackend.user.service.impl;
 
-import com.hyuse.pizzaOrderingBackend.user.api.dto.UserDTO;
-import com.hyuse.pizzaOrderingBackend.user.internal.util.UserMapper;
 import com.hyuse.pizzaOrderingBackend.infra.internal.exceptions.ResourceNotFoundException;
-import com.hyuse.pizzaOrderingBackend.user.internal.exceptions.UserAlreadyExistsException;
-import com.hyuse.pizzaOrderingBackend.user.internal.repository.UserRepository;
-import com.hyuse.pizzaOrderingBackend.user.internal.model.*;
+import com.hyuse.pizzaOrderingBackend.user.dto.UserDTO;
+import com.hyuse.pizzaOrderingBackend.user.exceptions.UserAlreadyExistsException;
+import com.hyuse.pizzaOrderingBackend.user.model.*;
+import com.hyuse.pizzaOrderingBackend.user.repository.UserRepository;
+import com.hyuse.pizzaOrderingBackend.user.service.UserServiceInterface;
+import com.hyuse.pizzaOrderingBackend.user.util.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

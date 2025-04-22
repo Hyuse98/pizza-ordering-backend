@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.exceptions;
+package com.hyuse.pizzaOrderingBackend.user.exceptions;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

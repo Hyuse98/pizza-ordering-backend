@@ -1,4 +1,4 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.model;
+package com.hyuse.pizzaOrderingBackend.user.model;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -11,26 +11,28 @@ import java.util.Objects;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Email {
+public class Name {
 
-    private String emailAddress;
+    private String firstName;
+    private String lastName;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Email email = (Email) o;
-        return Objects.equals(emailAddress, email.emailAddress);
+        Name name = (Name) o;
+        return Objects.equals(firstName, name.firstName) &&
+                Objects.equals(lastName, name.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emailAddress);
+        return Objects.hash(firstName, lastName);
     }
 
     @Override
     public String toString() {
-        return emailAddress;
+        return firstName + " " + lastName;
     }
 
 }

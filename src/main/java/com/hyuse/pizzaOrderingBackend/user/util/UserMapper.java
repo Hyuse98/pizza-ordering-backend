@@ -1,7 +1,7 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.util;
+package com.hyuse.pizzaOrderingBackend.user.util;
 
-import com.hyuse.pizzaOrderingBackend.user.api.dto.UserDTO;
-import com.hyuse.pizzaOrderingBackend.user.internal.model.*;
+import com.hyuse.pizzaOrderingBackend.user.dto.UserDTO;
+import com.hyuse.pizzaOrderingBackend.user.model.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -16,30 +16,30 @@ public class UserMapper {
 
     public User toEntity(UserDTO userDTO) {
 
-            Name name = new Name(
-                    userDTO.firstName(),
-                    userDTO.lastName());
+        Name name = new Name(
+                userDTO.firstName(),
+                userDTO.lastName());
 
-            Email email = new Email(
-                    userDTO.emailAddress());
+        Email email = new Email(
+                userDTO.emailAddress());
 
-            Password password = new Password(
-                    passwordEncoder.encode(userDTO.passwordValue()));
+        Password password = new Password(
+                passwordEncoder.encode(userDTO.passwordValue()));
 
-            Phone phone = new Phone(
-                    userDTO.phoneNumber());
+        Phone phone = new Phone(
+                userDTO.phoneNumber());
 
-            Address address = new Address(
-                    userDTO.country(),
-                    userDTO.neighborhood(),
-                    userDTO.street(),
-                    userDTO.houseNumber(),
-                    userDTO.city(),
-                    userDTO.state(),
-                    userDTO.zipCode()
-            );
+        Address address = new Address(
+                userDTO.country(),
+                userDTO.neighborhood(),
+                userDTO.street(),
+                userDTO.houseNumber(),
+                userDTO.city(),
+                userDTO.state(),
+                userDTO.zipCode()
+        );
 
-            return new User(name, email, password, address, phone);
+        return new User(name, email, password, address, phone);
     }
 
     public UserDTO toDto(User user) {

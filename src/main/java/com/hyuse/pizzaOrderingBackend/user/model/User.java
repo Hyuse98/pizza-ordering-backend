@@ -1,18 +1,23 @@
-package com.hyuse.pizzaOrderingBackend.user.internal.model;
+package com.hyuse.pizzaOrderingBackend.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hyuse.pizzaOrderingBackend.order.model.Order;
+import com.hyuse.pizzaOrderingBackend.cart.model.Cart;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "usersAccount")
+@Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -37,6 +42,13 @@ public class User {
     private Address address;
 
     private boolean active = true;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
     public User(Name name, Email email, Password password, Address address, Phone phone) {
         this.name = name;
